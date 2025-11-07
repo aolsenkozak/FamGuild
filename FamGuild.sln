@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FamGuild.API", "FamGuild.API\FamGuild.API.csproj", "{BAF241D4-32FC-4704-B121-5A0575754C7A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FamGuild.Test", "FamGuild.Test\FamGuild.Test.csproj", "{35668114-FD12-408F-B6A0-1FAD848A34ED}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BAF241D4-32FC-4704-B121-5A0575754C7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BAF241D4-32FC-4704-B121-5A0575754C7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BAF241D4-32FC-4704-B121-5A0575754C7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BAF241D4-32FC-4704-B121-5A0575754C7A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35668114-FD12-408F-B6A0-1FAD848A34ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35668114-FD12-408F-B6A0-1FAD848A34ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35668114-FD12-408F-B6A0-1FAD848A34ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35668114-FD12-408F-B6A0-1FAD848A34ED}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
