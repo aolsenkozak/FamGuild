@@ -1,4 +1,6 @@
-﻿namespace FamGuild.API.Domain.Treasury.Common;
+﻿using FamGuild.API.Domain.Common.ResultPattern;
+
+namespace FamGuild.API.Domain.Treasury.Common;
 
 public class Recurrence
 {
@@ -13,8 +15,27 @@ public class Recurrence
         Frequency = frequency;
     }
 
-    public static Recurrence Create(DateOnly startDate, DateOnly? endDate, Frequencies frequency)
+    public static Result<Recurrence> Create(DateOnly startDate, DateOnly? endDate, Frequencies frequency)
     {
-        return new Recurrence(startDate, endDate, frequency);
+        if (endDate is not null &&
+            IsEndDateEarlierThanFrequencyDate(startDate, endDate!.Value, frequency))
+        {
+            var error = new Error("BadRequest", "End date needs to be later than the frequency date");
+            return Result.Failure<Recurrence>(error);
+        }
+        return Result.Success(new Recurrence(startDate, endDate, frequency));
+    }
+
+    private static bool IsEndDateEarlierThanFrequencyDate(DateOnly startDate, DateOnly endDate, Frequencies frequency)
+    {
+        return frequency switch
+        {
+            Frequencies.Weekly => endDate < startDate.AddDays(7),
+            Frequencies.BiWeekly => endDate < startDate.AddDays(14),
+            Frequencies.Monthly => endDate < startDate.AddMonths(1),
+            Frequencies.Quarterly => endDate < startDate.AddMonths(3),
+            Frequencies.Yearly => endDate < startDate.AddYears(1),
+            _ => false
+        };
     }
 }
