@@ -1,3 +1,4 @@
+using FamGuild.API.Features.RecurringItems.Create;
 using FamGuild.API.Persistence;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,6 +11,8 @@ builder.Services.AddOpenApi();
 builder.Services.AddDbContext<FamGuildDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("Database")));
 
+builder.Services.AddCreateRecurringItemCommandHandlerToDependencyInjection();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -19,5 +22,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.RegisterCreateRecurringItemEndpoints();
 
 app.Run();

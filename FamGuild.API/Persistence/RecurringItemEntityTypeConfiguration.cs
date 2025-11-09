@@ -1,4 +1,5 @@
 ﻿using FamGuild.API.Domain.Treasury;
+using FamGuild.API.Domain.Treasury.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -26,7 +27,8 @@ public class RecurringItemEntityTypeConfiguration : IEntityTypeConfiguration<Rec
         {
             recurrence.Property(r => r.StartDate).HasColumnName("StartDate");
             recurrence.Property(r => r.EndDate).HasColumnName("EndDate");
-            recurrence.Property(r => r.Frequency).HasColumnName("Frequency");
+            recurrence.Property(r => r.Frequency)
+                .HasColumnName("Frequency");
         });
         
     }

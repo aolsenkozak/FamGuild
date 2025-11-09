@@ -1,6 +1,18 @@
-@FamGuild.API_HostAddress = http://localhost:5163
 
-GET {{FamGuild.API_HostAddress}}/weatherforecast/
-Accept: application/json
+###Create a Recurring Item
+POST {{HostAddress}}/recurring-items/
+Content-Type: application/json
 
-###
+{
+    "name":"Test Recurring Item",
+    "type": 0,
+    "amount": 
+    {
+    "value":100.00,
+    "currencycode":"CAD"
+    },
+    "startDate": "2025-11-08",
+    "endDate": "2025-11-15",
+    "frequency":0
+
+}

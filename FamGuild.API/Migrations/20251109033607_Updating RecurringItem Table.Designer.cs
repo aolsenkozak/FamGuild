@@ -3,6 +3,7 @@ using System;
 using FamGuild.API.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FamGuild.API.Migrations
 {
     [DbContext(typeof(FamGuildDbContext))]
-    partial class FamGuildDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251109033607_Updating RecurringItem Table")]
+    partial class UpdatingRecurringItemTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -41,7 +44,7 @@ namespace FamGuild.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("RecurringItems", (string)null);
+                    b.ToTable("RecurringItems");
                 });
 
             modelBuilder.Entity("FamGuild.API.Domain.Treasury.RecurringItem", b =>
@@ -60,7 +63,7 @@ namespace FamGuild.API.Migrations
 
                             b1.HasKey("RecurringItemId");
 
-                            b1.ToTable("RecurringItems", (string)null);
+                            b1.ToTable("RecurringItems");
 
                             b1.WithOwner()
                                 .HasForeignKey("RecurringItemId");
@@ -82,7 +85,7 @@ namespace FamGuild.API.Migrations
 
                             b1.HasKey("RecurringItemId");
 
-                            b1.ToTable("RecurringItems", (string)null);
+                            b1.ToTable("RecurringItems");
 
                             b1.WithOwner()
                                 .HasForeignKey("RecurringItemId");

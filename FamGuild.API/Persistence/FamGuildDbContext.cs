@@ -5,6 +5,6 @@ namespace FamGuild.API.Persistence;
 
 public class FamGuildDbContext(DbContextOptions options) : DbContext(options)
 {
-    DbSet<RecurringItem>  RecurringItems { get; set; }
+    public DbSet<RecurringItem>  RecurringItems { get; set; }
 }
 
