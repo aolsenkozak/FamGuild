@@ -1,12 +1,14 @@
 ﻿using FamGuild.API.Domain.Common.ResultPattern;
+using Microsoft.EntityFrameworkCore;
 
 namespace FamGuild.API.Domain.Treasury.Common;
 
-public class Recurrence
+[Owned]
+public record Recurrence
 {
-    public DateOnly StartDate { get; private set; }
-    public DateOnly? EndDate { get; private set; }
-    public Frequencies Frequency { get; private set; }
+    public DateOnly StartDate { get; init; }
+    public DateOnly? EndDate { get; init; }
+    public Frequencies Frequency { get; init; }
 
     private Recurrence(DateOnly startDate, DateOnly? endDate, Frequencies frequency)
     {
@@ -37,5 +39,9 @@ public class Recurrence
             Frequencies.Yearly => endDate < startDate.AddYears(1),
             _ => false
         };
+    }
+
+    private Recurrence()
+    {
     }
 }
