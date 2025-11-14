@@ -1,6 +1,6 @@
 ﻿using FamGuild.API.Domain.Common.ResultPattern;
 using FamGuild.API.Domain.Treasury;
-using FamGuild.API.Features._Shared;
+using FamGuild.API.Features.Common;
 using FamGuild.API.Persistence;
 using Microsoft.EntityFrameworkCore;
 

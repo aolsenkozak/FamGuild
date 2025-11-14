@@ -16,3 +16,6 @@ Content-Type: application/json
     "frequency":0
 
 }
+
+###GetRecurringItems
+GET {{HostAddress}}/recurring-items/

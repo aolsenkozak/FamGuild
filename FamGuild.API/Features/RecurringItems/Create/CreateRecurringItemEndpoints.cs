@@ -1,5 +1,5 @@
 ﻿using FamGuild.API.Domain.Common.ResultPattern;
-using FamGuild.API.Features._Shared;
+using FamGuild.API.Features.Common;
 
 namespace FamGuild.API.Features.RecurringItems.Create;
 

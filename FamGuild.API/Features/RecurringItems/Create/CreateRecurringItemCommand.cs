@@ -5,9 +5,9 @@ namespace FamGuild.API.Features.RecurringItems.Create;
 
 public record CreateRecurringItemCommand
 {
-    public string Name { get; init; }  = string.Empty;
-    public RecurringItemType Type { get; init; }
-    public Money Amount { get; init; }
+    public string Name { get; }  = string.Empty;
+    public required RecurringItemType Type { get; init; }
+    public required Money Amount { get; init; }
     public string Category { get; init; } = string.Empty;
     public DateOnly StartDate { get; init; }
     public DateOnly EndDate { get; init; }

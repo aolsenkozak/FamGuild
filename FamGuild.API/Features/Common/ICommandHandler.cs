@@ -1,4 +1,4 @@
-﻿namespace FamGuild.API.Features._Shared;
+﻿namespace FamGuild.API.Features.Common;
 
 public interface ICommandHandler<TCommand, TResult>
 {
