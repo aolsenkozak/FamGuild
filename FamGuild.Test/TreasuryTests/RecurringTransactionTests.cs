@@ -16,13 +16,13 @@ public class RecurringTransactionTests
         var testCategory = "TestCategory";
 
         var testAmount = new Money((decimal)100.00, "CAD");
-        
-        var recurringItemResult = RecurringTransaction.Create(itemType, testName, 
+
+        var recurringItemResult = RecurringTransaction.Create(itemType, testName,
             testAmount, testCategory, startDate, endDate, frequency);
-        
+
         Assert.That(recurringItemResult.IsSuccess, Is.True);
-        
-        var  recurringItem = recurringItemResult.Value;
+
+        var recurringItem = recurringItemResult.Value;
 
         Assert.Multiple(() =>
         {

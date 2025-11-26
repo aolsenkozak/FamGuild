@@ -21,13 +21,10 @@ public class CreateRecurringItemHandler(FamGuildDbContext dbContext)
             command.Frequency
         );
 
-        if (recurringItemResult.IsFailure)
-        {
-            return Result.Failure<Guid>(recurringItemResult.Error);
-        }
-        
+        if (recurringItemResult.IsFailure) return Result.Failure<Guid>(recurringItemResult.Error);
+
         var newRecurringItem = recurringItemResult.Value;
-        
+
         dbContext.RecurringItems.Add(newRecurringItem);
         try
         {
@@ -41,6 +38,4 @@ public class CreateRecurringItemHandler(FamGuildDbContext dbContext)
 
         return Result.Success(newRecurringItem.Id);
     }
-
-
 }

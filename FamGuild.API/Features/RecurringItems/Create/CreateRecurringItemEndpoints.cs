@@ -9,7 +9,7 @@ public static class CreateRecurringItemEndpoints
     {
         services.AddScoped<ICommandHandler<CreateRecurringItemCommand, Result<Guid>>, CreateRecurringItemHandler>();
     }
-    
+
     public static void RegisterCreateRecurringItemEndpoints(this WebApplication app)
     {
         app.MapPost("recurring-items", async (
@@ -18,13 +18,9 @@ public static class CreateRecurringItemEndpoints
         {
             var handlerResult = await handler.HandleAsync(command);
 
-            if (handlerResult.IsFailure)
-            {
-                return Results.InternalServerError(handlerResult.Error.Message);
-            }
+            if (handlerResult.IsFailure) return Results.InternalServerError(handlerResult.Error.Message);
             var id = handlerResult.Value;
             return Results.Created($"/recurring-items/{id}", id);
         });
     }
-    
 }

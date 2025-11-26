@@ -710,6 +710,3 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 
-!/FamGuild.API/bin/Debug/
-!/FamGuild.Test/obj/
-!/FamGuild.Test/bin/Debug/

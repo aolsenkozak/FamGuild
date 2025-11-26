@@ -3,5 +3,5 @@
 public enum AccountTransactionStatus
 {
     Pending,
-    Confirmed,
+    Confirmed
 }

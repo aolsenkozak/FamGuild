@@ -5,14 +5,8 @@ namespace FamGuild.API.Domain.Treasury;
 
 public class RecurringTransaction
 {
-    public Guid Id { get; private set; }
-    public EntryClassification Classification { get; private set; }
-    public string Name { get; private set; } = string.Empty;
-    public Money Amount { get; private set; }
-    public string Category { get; private set; } =  string.Empty;
-    public Recurrence Recurrence { get; private set; }
-
-    private RecurringTransaction(EntryClassification type, string name, Money amount, string category, Recurrence recurrence)
+    private RecurringTransaction(EntryClassification type, string name, Money amount, string category,
+        Recurrence recurrence)
     {
         Id = Guid.NewGuid();
         Classification = type;
@@ -22,7 +16,18 @@ public class RecurringTransaction
         Recurrence = recurrence;
     }
 
-    public static Result<RecurringTransaction> Create(EntryClassification type, string name, 
+    private RecurringTransaction()
+    {
+    }
+
+    public Guid Id { get; private set; }
+    public EntryClassification Classification { get; private set; }
+    public string Name { get; private set; } = string.Empty;
+    public Money Amount { get; private set; }
+    public string Category { get; private set; } = string.Empty;
+    public Recurrence Recurrence { get; private set; }
+
+    public static Result<RecurringTransaction> Create(EntryClassification type, string name,
         Money amount, string category, DateOnly startDate, DateOnly? endDate, Frequencies frequencies)
     {
         if (amount.Value < 0)
@@ -30,20 +35,13 @@ public class RecurringTransaction
             var error = new Error("BadRequest", "Amount must be greater than or equal to zero.");
             return Result.Failure<RecurringTransaction>(error);
         }
-        
+
         var recurrenceResult = Recurrence.Create(startDate, endDate, frequencies);
 
-        if (recurrenceResult.IsFailure)
-        {
-            return  Result.Failure<RecurringTransaction>(recurrenceResult.Error);
-        }
-        
+        if (recurrenceResult.IsFailure) return Result.Failure<RecurringTransaction>(recurrenceResult.Error);
+
         var recurrence = recurrenceResult.Value;
 
-        return Result.Success((new RecurringTransaction(type, name, amount, category, recurrence)));
-    }
-
-    private RecurringTransaction()
-    {
+        return Result.Success(new RecurringTransaction(type, name, amount, category, recurrence));
     }
 }

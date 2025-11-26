@@ -6,16 +6,20 @@ namespace FamGuild.API.Domain.Treasury.Common;
 [Owned]
 public record Recurrence
 {
-    public DateOnly StartDate { get; init; }
-    public DateOnly? EndDate { get; init; }
-    public Frequencies Frequency { get; init; }
-
     private Recurrence(DateOnly startDate, DateOnly? endDate, Frequencies frequency)
     {
         StartDate = startDate;
         EndDate = endDate;
         Frequency = frequency;
     }
+
+    private Recurrence()
+    {
+    }
+
+    public DateOnly StartDate { get; init; }
+    public DateOnly? EndDate { get; init; }
+    public Frequencies Frequency { get; init; }
 
     public static Result<Recurrence> Create(DateOnly startDate, DateOnly? endDate, Frequencies frequency)
     {
@@ -25,6 +29,7 @@ public record Recurrence
             var error = new Error("BadRequest", "End date needs to be later than the frequency date");
             return Result.Failure<Recurrence>(error);
         }
+
         return Result.Success(new Recurrence(startDate, endDate, frequency));
     }
 
@@ -39,9 +44,5 @@ public record Recurrence
             Frequencies.Yearly => endDate < startDate.AddYears(1),
             _ => false
         };
-    }
-
-    private Recurrence()
-    {
     }
 }

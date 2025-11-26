@@ -20,14 +20,14 @@ public class AccountTransactionTests
             Frequencies.BiWeekly
         ).Value;
 
-        var testLedgerEntryResult = 
-            AccountTransaction.CreateFromRecurringTransaction(testRecurringTransaction, 
+        var testLedgerEntryResult =
+            AccountTransaction.CreateFromRecurringTransaction(testRecurringTransaction,
                 DateTime.Now.AddDays(14), AccountTransactionStatus.Pending);
-        
+
         Assert.That(testLedgerEntryResult.IsSuccess, Is.True);
-        
-        var  testLedgerEntry = testLedgerEntryResult.Value;
-        
+
+        var testLedgerEntry = testLedgerEntryResult.Value;
+
         Assert.Multiple(() =>
         {
             Assert.That(testLedgerEntry.Name, Is.EqualTo(testRecurringTransaction.Name));
@@ -37,7 +37,7 @@ public class AccountTransactionTests
             Assert.That(testLedgerEntry.RecurringTransactionId, Is.EqualTo(testRecurringTransaction.Id));
         });
     }
-    
+
     [Test]
     public void LedgerEntry_ShouldGetCreated_WhenProvidedValidInformation()
     {
@@ -47,15 +47,15 @@ public class AccountTransactionTests
         var transactionStatus = AccountTransactionStatus.Confirmed;
         var entryClassification = EntryClassification.Expense;
 
-        var testLedgerEntryResult = 
-            AccountTransaction.Create( EntryClassification.Expense,
+        var testLedgerEntryResult =
+            AccountTransaction.Create(EntryClassification.Expense,
                 testName, testAmount, testCategory,
                 DateTime.Now, transactionStatus);
-        
+
         Assert.That(testLedgerEntryResult.IsSuccess, Is.True);
-        
-        var  testLedgerEntry = testLedgerEntryResult.Value;
-        
+
+        var testLedgerEntry = testLedgerEntryResult.Value;
+
         Assert.Multiple(() =>
         {
             Assert.That(testLedgerEntry.Name, Is.EqualTo(testName));

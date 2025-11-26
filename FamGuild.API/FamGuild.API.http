@@ -4,17 +4,15 @@ POST {{HostAddress}}/recurring-items/
 Content-Type: application/json
 
 {
-    "name":"Test Recurring Item",
-    "type": 0,
-    "amount": 
-    {
-    "value":100.00,
-    "currencycode":"CAD"
-    },
-    "startDate": "2025-11-08",
-    "endDate": "2025-11-15",
-    "frequency":0
-
+  "name": "Test Recurring Item",
+  "type": 0,
+  "amount": {
+    "value": 100.00,
+    "currencycode": "CAD"
+  },
+  "startDate": "2025-11-08",
+  "endDate": "2025-11-15",
+  "frequency": 0
 }
 
 ###GetRecurringItems

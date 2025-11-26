@@ -9,9 +9,11 @@ public static class GetRecurringItemEndpoints
 {
     public static void AddGetRecurringItemCommandHandlerToDependencyInjection(this IServiceCollection services)
     {
-        services.AddScoped<ICommandHandler<GetRecurringItemsCommand, Result<List<RecurringTransaction>>>, GetRecurringItemsHandler>();
+        services
+            .AddScoped<ICommandHandler<GetRecurringItemsCommand, Result<List<RecurringTransaction>>>,
+                GetRecurringItemsHandler>();
     }
-    
+
     public static void RegisterGetRecurringItemEndpoints(this WebApplication app)
     {
         app.MapGet("recurring-items/{id}", async (
@@ -23,16 +25,15 @@ public static class GetRecurringItemEndpoints
 
             return handlerResult switch
             {
-                {IsFailure : true, Error.Code : "NotFound"}
+                { IsFailure : true, Error.Code : "NotFound" }
                     => Results.NotFound(),
-                { IsFailure:true, Error: var error}
+                { IsFailure: true, Error: var error }
                     => Results.InternalServerError(error.Message),
-                {Value: var value} 
+                { Value: var value }
                     => Results.Ok(value)
             };
-
         });
-        
+
         app.MapGet("recurring-items/", async (
             [FromServices] ICommandHandler<GetRecurringItemsCommand, Result<List<RecurringTransaction>>> handler) =>
         {
@@ -41,15 +42,13 @@ public static class GetRecurringItemEndpoints
 
             return handlerResult switch
             {
-                {IsFailure : true, Error.Code : "NotFound"}
+                { IsFailure : true, Error.Code : "NotFound" }
                     => Results.NotFound(),
-                { IsFailure:true, Error: var error}
+                { IsFailure: true, Error: var error }
                     => Results.InternalServerError(error.Message),
-                {Value: var value} 
+                { Value: var value }
                     => Results.Ok(value)
             };
-
         });
     }
-    
 }

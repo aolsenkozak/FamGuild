@@ -29,6 +29,5 @@ public class RecurringItemEntityTypeConfiguration : IEntityTypeConfiguration<Rec
             recurrence.Property(r => r.Frequency)
                 .HasColumnName("Frequency");
         });
-        
     }
 }

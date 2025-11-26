@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Ac6jlw/5lDw=",
+  "dgSpecHash": "AkSgqrUsw5g=",
   "success": true,
-  "projectFilePath": "C:\\FamGuild_Public\\FamGuild.Test\\FamGuild.Test.csproj",
+  "projectFilePath": "C:\\FamGuild\\FamGuild\\FamGuild.Test\\FamGuild.Test.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\adam_\\.nuget\\packages\\coverlet.collector\\6.0.4\\coverlet.collector.6.0.4.nupkg.sha512",
     "C:\\Users\\adam_\\.nuget\\packages\\microsoft.applicationinsights\\2.22.0\\microsoft.applicationinsights.2.22.0.nupkg.sha512",

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\FamGuild_Public\\FamGuild.Test\\FamGuild.Test.csproj": {}
+    "C:\\FamGuild\\FamGuild\\FamGuild.Test\\FamGuild.Test.csproj": {}
   },
   "projects": {
-    "C:\\FamGuild_Public\\FamGuild.API\\FamGuild.API.csproj": {
+    "C:\\FamGuild\\FamGuild\\FamGuild.API\\FamGuild.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\FamGuild_Public\\FamGuild.API\\FamGuild.API.csproj",
+        "projectUniqueName": "C:\\FamGuild\\FamGuild\\FamGuild.API\\FamGuild.API.csproj",
         "projectName": "FamGuild.API",
-        "projectPath": "C:\\FamGuild_Public\\FamGuild.API\\FamGuild.API.csproj",
+        "projectPath": "C:\\FamGuild\\FamGuild\\FamGuild.API\\FamGuild.API.csproj",
         "packagesPath": "C:\\Users\\adam_\\.nuget\\packages\\",
-        "outputPath": "C:\\FamGuild_Public\\FamGuild.API\\obj\\",
+        "outputPath": "C:\\FamGuild\\FamGuild\\FamGuild.API\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\adam_\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -104,14 +104,14 @@
         }
       }
     },
-    "C:\\FamGuild_Public\\FamGuild.Test\\FamGuild.Test.csproj": {
+    "C:\\FamGuild\\FamGuild\\FamGuild.Test\\FamGuild.Test.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\FamGuild_Public\\FamGuild.Test\\FamGuild.Test.csproj",
+        "projectUniqueName": "C:\\FamGuild\\FamGuild\\FamGuild.Test\\FamGuild.Test.csproj",
         "projectName": "FamGuild.Test",
-        "projectPath": "C:\\FamGuild_Public\\FamGuild.Test\\FamGuild.Test.csproj",
+        "projectPath": "C:\\FamGuild\\FamGuild\\FamGuild.Test\\FamGuild.Test.csproj",
         "packagesPath": "C:\\Users\\adam_\\.nuget\\packages\\",
-        "outputPath": "C:\\FamGuild_Public\\FamGuild.Test\\obj\\",
+        "outputPath": "C:\\FamGuild\\FamGuild\\FamGuild.Test\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\adam_\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -126,8 +126,8 @@
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "C:\\FamGuild_Public\\FamGuild.API\\FamGuild.API.csproj": {
-                "projectPath": "C:\\FamGuild_Public\\FamGuild.API\\FamGuild.API.csproj"
+              "C:\\FamGuild\\FamGuild\\FamGuild.API\\FamGuild.API.csproj": {
+                "projectPath": "C:\\FamGuild\\FamGuild\\FamGuild.API\\FamGuild.API.csproj"
               }
             }
           }

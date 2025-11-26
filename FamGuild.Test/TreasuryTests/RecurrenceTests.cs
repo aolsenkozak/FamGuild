@@ -9,10 +9,10 @@ public class RecurrenceTests
     public void Recurrence_Should_Get_Created_When_Provided_Valid_Info()
     {
         //Arrange
-        DateOnly startDate = DateOnly.FromDateTime(DateTime.Now);
-        Frequencies frequency = Frequencies.Weekly;
+        var startDate = DateOnly.FromDateTime(DateTime.Now);
+        var frequency = Frequencies.Weekly;
         //Act
-        var testRecurrenceResult = Recurrence.Create(startDate, endDate:null, frequency);
+        var testRecurrenceResult = Recurrence.Create(startDate, null, frequency);
         var testRecurrence = testRecurrenceResult.Value;
         //Assert
         Assert.Multiple(() =>
@@ -21,7 +21,6 @@ public class RecurrenceTests
             Assert.That(testRecurrence.StartDate, Is.EqualTo(startDate));
             Assert.That(testRecurrence.Frequency, Is.EqualTo(frequency));
         });
-
     }
 
     private static object[] earlyEndDateTestCases =
@@ -31,15 +30,15 @@ public class RecurrenceTests
         new object[] { Frequencies.Monthly, 25 },
         new object[] { Frequencies.Quarterly, 70 }
     };
-        
+
     [TestCaseSource(nameof(earlyEndDateTestCases))]
-    public void Recurrence_Should_Return_Error_When_End_Date_Earlier_Than_Frequency(Frequencies frequency, 
+    public void Recurrence_Should_Return_Error_When_End_Date_Earlier_Than_Frequency(Frequencies frequency,
         int daysToAdd)
     {
         //Arrange
         var startDate = DateOnly.FromDateTime(DateTime.Now);
         var endDate = startDate.AddDays(daysToAdd);
-        
+
         //Act
         var recurrenceResult = Recurrence.Create(startDate, endDate, frequency);
         //Assert
