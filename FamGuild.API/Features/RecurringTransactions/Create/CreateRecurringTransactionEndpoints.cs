@@ -12,7 +12,7 @@ public static class CreateRecurringTransactionEndpoints
 
     public static void RegisterCreateRecurringTransactionEndpoints(this WebApplication app)
     {
-        app.MapPost("recurring-items", async (
+        app.MapPost("recurring-transactions", async (
             CreateRecurringTransactionCommand command,
             ICommandHandler<CreateRecurringTransactionCommand, Result<Guid>> handler) =>
         {
@@ -20,7 +20,7 @@ public static class CreateRecurringTransactionEndpoints
 
             if (handlerResult.IsFailure) return Results.InternalServerError(handlerResult.Error.Message);
             var id = handlerResult.Value;
-            return Results.Created($"/recurring-items/{id}", id);
+            return Results.Created($"/recurring-transactions/{id}", id);
         });
     }
 }

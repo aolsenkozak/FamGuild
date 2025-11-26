@@ -1,6 +1,6 @@
 
 ###Create a Recurring Item
-POST {{HostAddress}}/recurring-items/
+POST {{HostAddress}}/recurring-transactions/
 Content-Type: application/json
 
 {
@@ -16,4 +16,4 @@ Content-Type: application/json
 }
 
 ###GetRecurringItems
-GET {{HostAddress}}/recurring-items/
+GET {{HostAddress}}/recurring-transactions/
