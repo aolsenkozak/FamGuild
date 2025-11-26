@@ -1,5 +1,5 @@
-using FamGuild.API.Features.RecurringItems.Create;
-using FamGuild.API.Features.RecurringItems.Get;
+using FamGuild.API.Features.RecurringTransactions.Create;
+using FamGuild.API.Features.RecurringTransactions.Get;
 using FamGuild.API.Persistence;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,8 +12,8 @@ builder.Services.AddOpenApi();
 builder.Services.AddDbContext<FamGuildDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("Database")));
 
-builder.Services.AddCreateRecurringItemCommandHandlerToDependencyInjection();
-builder.Services.AddGetRecurringItemCommandHandlerToDependencyInjection();
+builder.Services.AddCreateRecurringTransactionCommandHandlerToDependencyInjection();
+builder.Services.AddGetRecurringTransactionCommandHandlerToDependencyInjection();
 
 var app = builder.Build();
 
@@ -22,7 +22,7 @@ if (app.Environment.IsDevelopment()) app.MapOpenApi();
 
 app.UseHttpsRedirection();
 
-app.RegisterCreateRecurringItemEndpoints();
-app.RegisterGetRecurringItemEndpoints();
+app.RegisterCreateRecurringTransactionEndpoints();
+app.RegisterGetRecurringTransactionEndpoints();
 
 app.Run();

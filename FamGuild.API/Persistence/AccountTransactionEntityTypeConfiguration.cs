@@ -4,10 +4,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace FamGuild.API.Persistence;
 
-public class RecurringItemEntityTypeConfiguration : IEntityTypeConfiguration<RecurringTransaction>
+public class AccountTransactionEntityTypeConfiguration : IEntityTypeConfiguration<AccountTransaction>
 {
-    public void Configure(EntityTypeBuilder<RecurringTransaction> builder)
+    public void Configure(EntityTypeBuilder<AccountTransaction> builder)
     {
+       
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Name)
             .IsRequired()
@@ -20,14 +21,6 @@ public class RecurringItemEntityTypeConfiguration : IEntityTypeConfiguration<Rec
         {
             money.Property(m => m.Value).HasColumnName("AmountValue");
             money.Property(m => m.CurrencyCode).HasColumnName("CurrencyCode");
-        });
-
-        builder.OwnsOne(x => x.Recurrence, recurrence =>
-        {
-            recurrence.Property(r => r.StartDate).HasColumnName("StartDate");
-            recurrence.Property(r => r.EndDate).HasColumnName("EndDate");
-            recurrence.Property(r => r.Frequency)
-                .HasColumnName("Frequency");
         });
     }
 }

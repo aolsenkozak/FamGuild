@@ -3,6 +3,7 @@ using System;
 using FamGuild.API.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FamGuild.API.Migrations
 {
     [DbContext(typeof(FamGuildDbContext))]
-    partial class FamGuildDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251126021405_Adding Account Transactions")]
+    partial class AddingAccountTransactions
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

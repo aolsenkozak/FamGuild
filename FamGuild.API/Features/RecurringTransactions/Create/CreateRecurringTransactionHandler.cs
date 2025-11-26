@@ -4,14 +4,14 @@ using FamGuild.API.Features.Common;
 using FamGuild.API.Persistence;
 using Microsoft.EntityFrameworkCore;
 
-namespace FamGuild.API.Features.RecurringItems.Create;
+namespace FamGuild.API.Features.RecurringTransactions.Create;
 
-public class CreateRecurringItemHandler(FamGuildDbContext dbContext)
-    : ICommandHandler<CreateRecurringItemCommand, Result<Guid>>
+public class CreateRecurringTransactionHandler(FamGuildDbContext dbContext)
+    : ICommandHandler<CreateRecurringTransactionCommand, Result<Guid>>
 {
-    public async Task<Result<Guid>> HandleAsync(CreateRecurringItemCommand command, CancellationToken ct = default)
+    public async Task<Result<Guid>> HandleAsync(CreateRecurringTransactionCommand command, CancellationToken ct = default)
     {
-        var recurringItemResult = RecurringTransaction.Create(
+        var RecurringTransactionResult = RecurringTransaction.Create(
             command.Type,
             command.Name,
             command.Amount,
@@ -21,11 +21,11 @@ public class CreateRecurringItemHandler(FamGuildDbContext dbContext)
             command.Frequency
         );
 
-        if (recurringItemResult.IsFailure) return Result.Failure<Guid>(recurringItemResult.Error);
+        if (RecurringTransactionResult.IsFailure) return Result.Failure<Guid>(RecurringTransactionResult.Error);
 
-        var newRecurringItem = recurringItemResult.Value;
+        var newRecurringTransaction = RecurringTransactionResult.Value;
 
-        dbContext.RecurringItems.Add(newRecurringItem);
+        dbContext.RecurringTransactions.Add(newRecurringTransaction);
         try
         {
             await dbContext.SaveChangesAsync(ct);
@@ -36,6 +36,6 @@ public class CreateRecurringItemHandler(FamGuildDbContext dbContext)
             return Result.Failure<Guid>(error);
         }
 
-        return Result.Success(newRecurringItem.Id);
+        return Result.Success(newRecurringTransaction.Id);
     }
 }

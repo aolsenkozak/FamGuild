@@ -3,24 +3,24 @@ using FamGuild.API.Domain.Treasury;
 using FamGuild.API.Features.Common;
 using Microsoft.AspNetCore.Mvc;
 
-namespace FamGuild.API.Features.RecurringItems.Get;
+namespace FamGuild.API.Features.RecurringTransactions.Get;
 
-public static class GetRecurringItemEndpoints
+public static class GetRecurringTransactionEndpoints
 {
-    public static void AddGetRecurringItemCommandHandlerToDependencyInjection(this IServiceCollection services)
+    public static void AddGetRecurringTransactionCommandHandlerToDependencyInjection(this IServiceCollection services)
     {
         services
-            .AddScoped<ICommandHandler<GetRecurringItemsCommand, Result<List<RecurringTransaction>>>,
-                GetRecurringItemsHandler>();
+            .AddScoped<ICommandHandler<GetRecurringTransactionsCommand, Result<List<RecurringTransaction>>>,
+                GetRecurringTransactionsHandler>();
     }
 
-    public static void RegisterGetRecurringItemEndpoints(this WebApplication app)
+    public static void RegisterGetRecurringTransactionEndpoints(this WebApplication app)
     {
-        app.MapGet("recurring-items/{id}", async (
+        app.MapGet("recurring-transactions/{id}", async (
             [FromRoute] Guid? id,
-            [FromServices] ICommandHandler<GetRecurringItemsCommand, Result<List<RecurringTransaction>>> handler) =>
+            [FromServices] ICommandHandler<GetRecurringTransactionsCommand, Result<List<RecurringTransaction>>> handler) =>
         {
-            var command = new GetRecurringItemsCommand(id ?? Guid.Empty);
+            var command = new GetRecurringTransactionsCommand(id ?? Guid.Empty);
             var handlerResult = await handler.HandleAsync(command);
 
             return handlerResult switch
@@ -34,10 +34,10 @@ public static class GetRecurringItemEndpoints
             };
         });
 
-        app.MapGet("recurring-items/", async (
-            [FromServices] ICommandHandler<GetRecurringItemsCommand, Result<List<RecurringTransaction>>> handler) =>
+        app.MapGet("recurring-transactions/", async (
+            [FromServices] ICommandHandler<GetRecurringTransactionsCommand, Result<List<RecurringTransaction>>> handler) =>
         {
-            var command = new GetRecurringItemsCommand(Guid.Empty);
+            var command = new GetRecurringTransactionsCommand(Guid.Empty);
             var handlerResult = await handler.HandleAsync(command);
 
             return handlerResult switch

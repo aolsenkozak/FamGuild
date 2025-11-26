@@ -1,9 +1,9 @@
 ﻿using FamGuild.API.Domain.Treasury;
 using FamGuild.API.Domain.Treasury.Common;
 
-namespace FamGuild.API.Features.RecurringItems.Create;
+namespace FamGuild.API.Features.RecurringTransactions.Create;
 
-public record CreateRecurringItemCommand
+public record CreateRecurringTransactionCommand
 {
     public string Name { get; } = string.Empty;
     public required EntryClassification Type { get; init; }

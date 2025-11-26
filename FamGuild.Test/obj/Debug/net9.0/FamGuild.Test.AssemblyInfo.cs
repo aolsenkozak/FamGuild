@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FamGuild.Test")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a2668a6e51c199cebdf1017c4fb0a26c5d3c44f6")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+76372ff604bffdccd50e111369fbf1ef30c707db")]
 [assembly: System.Reflection.AssemblyProductAttribute("FamGuild.Test")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FamGuild.Test")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
