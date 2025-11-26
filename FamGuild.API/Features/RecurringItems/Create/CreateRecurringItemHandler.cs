@@ -11,7 +11,7 @@ public class CreateRecurringItemHandler(FamGuildDbContext dbContext)
 {
     public async Task<Result<Guid>> HandleAsync(CreateRecurringItemCommand command, CancellationToken ct = default)
     {
-        var recurringItemResult = RecurringItem.Create(
+        var recurringItemResult = RecurringTransaction.Create(
             command.Type,
             command.Name,
             command.Amount,

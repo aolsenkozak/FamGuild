@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace FamGuild.API.Persistence;
 
-public class RecurringItemEntityTypeConfiguration : IEntityTypeConfiguration<RecurringItem>
+public class RecurringItemEntityTypeConfiguration : IEntityTypeConfiguration<RecurringTransaction>
 {
-    public void Configure(EntityTypeBuilder<RecurringItem> builder)
+    public void Configure(EntityTypeBuilder<RecurringTransaction> builder)
     {
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Name)

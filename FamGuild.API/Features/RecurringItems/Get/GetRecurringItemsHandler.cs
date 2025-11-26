@@ -7,13 +7,13 @@ using Microsoft.EntityFrameworkCore;
 namespace FamGuild.API.Features.RecurringItems.Get;
 
 public class GetRecurringItemsHandler(FamGuildDbContext dbContext)
-    : ICommandHandler<GetRecurringItemsCommand, Result<List<RecurringItem>>>
+    : ICommandHandler<GetRecurringItemsCommand, Result<List<RecurringTransaction>>>
 {
     
-    public async Task<Result<List<RecurringItem>>> HandleAsync(GetRecurringItemsCommand command, 
+    public async Task<Result<List<RecurringTransaction>>> HandleAsync(GetRecurringItemsCommand command, 
         CancellationToken ct = default)
     {
-        List<RecurringItem> recurringItems = [];
+        List<RecurringTransaction> recurringItems = [];
         
         if (command.Id != Guid.Empty)
         {
@@ -23,7 +23,7 @@ public class GetRecurringItemsHandler(FamGuildDbContext dbContext)
             if (recurringItem == null)
             {
                 var error = new Error("NotFound", "Recurring item not found.");
-                return Result.Failure<List<RecurringItem>>(error);
+                return Result.Failure<List<RecurringTransaction>>(error);
             }
             
             recurringItems.Add(recurringItem);

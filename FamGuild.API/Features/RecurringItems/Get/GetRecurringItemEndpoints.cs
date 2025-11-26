@@ -9,14 +9,14 @@ public static class GetRecurringItemEndpoints
 {
     public static void AddGetRecurringItemCommandHandlerToDependencyInjection(this IServiceCollection services)
     {
-        services.AddScoped<ICommandHandler<GetRecurringItemsCommand, Result<List<RecurringItem>>>, GetRecurringItemsHandler>();
+        services.AddScoped<ICommandHandler<GetRecurringItemsCommand, Result<List<RecurringTransaction>>>, GetRecurringItemsHandler>();
     }
     
     public static void RegisterGetRecurringItemEndpoints(this WebApplication app)
     {
         app.MapGet("recurring-items/{id}", async (
             [FromRoute] Guid? id,
-            [FromServices] ICommandHandler<GetRecurringItemsCommand, Result<List<RecurringItem>>> handler) =>
+            [FromServices] ICommandHandler<GetRecurringItemsCommand, Result<List<RecurringTransaction>>> handler) =>
         {
             var command = new GetRecurringItemsCommand(id ?? Guid.Empty);
             var handlerResult = await handler.HandleAsync(command);
@@ -34,7 +34,7 @@ public static class GetRecurringItemEndpoints
         });
         
         app.MapGet("recurring-items/", async (
-            [FromServices] ICommandHandler<GetRecurringItemsCommand, Result<List<RecurringItem>>> handler) =>
+            [FromServices] ICommandHandler<GetRecurringItemsCommand, Result<List<RecurringTransaction>>> handler) =>
         {
             var command = new GetRecurringItemsCommand(Guid.Empty);
             var handlerResult = await handler.HandleAsync(command);

@@ -1,6 +1,6 @@
 ﻿namespace FamGuild.API.Domain.Treasury;
 
-public enum RecurringItemType
+public enum EntryClassification
 {
     Income,
     Expense
