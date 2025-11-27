@@ -11,7 +11,7 @@ public class CreateRecurringTransactionHandler(FamGuildDbContext dbContext)
 {
     public async Task<Result<Guid>> HandleAsync(CreateRecurringTransactionCommand command, CancellationToken ct = default)
     {
-        var RecurringTransactionResult = RecurringTransaction.Create(
+        var recurringTransactionResult = RecurringTransaction.Create(
             command.Type,
             command.Name,
             command.Amount,
@@ -21,9 +21,9 @@ public class CreateRecurringTransactionHandler(FamGuildDbContext dbContext)
             command.Frequency
         );
 
-        if (RecurringTransactionResult.IsFailure) return Result.Failure<Guid>(RecurringTransactionResult.Error);
+        if (recurringTransactionResult.IsFailure) return Result.Failure<Guid>(recurringTransactionResult.Error);
 
-        var newRecurringTransaction = RecurringTransactionResult.Value;
+        var newRecurringTransaction = recurringTransactionResult.Value;
 
         dbContext.RecurringTransactions.Add(newRecurringTransaction);
         try
