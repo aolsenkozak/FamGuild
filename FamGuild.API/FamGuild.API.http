@@ -19,4 +19,4 @@ Content-Type: application/json
 GET {{HostAddress}}/recurring-transactions/
 
 ###GetAccountTransactions
-GET {{HostAddress}}/account-transactions/
+GET {{HostAddress}}/account-transactions/?startDate=2025-11-01&endDate=2025-11-30

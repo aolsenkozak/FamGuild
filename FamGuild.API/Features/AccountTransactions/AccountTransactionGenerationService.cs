@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FamGuild.API.Features.AccountTransactions;
 
-public class AccountTransactionGenerationService(FamGuildDbContext dbContext)
+public class AccountTransactionGenerationService(FamGuildDbContext dbContext) : IAccountTransactionGenerationService
 {
     public async Task<Result<List<AccountTransactionDto>>> CreateAccountTransactionsForDateRange(
         DateOnly startDate, DateOnly endDate, CancellationToken ct = default)
@@ -35,31 +35,39 @@ public class AccountTransactionGenerationService(FamGuildDbContext dbContext)
     private async Task<Result<List<AccountTransactionDto>>> CreateAccountTransactionsForRecurringTransactionForDateRange(
         RecurringTransaction recurringTransaction, DateOnly startDate, DateOnly endDate, CancellationToken ct = default)
     {
-        var lastOccurredDateTime = await dbContext.AccountTransactions
-            .AsNoTracking()
-            .Where(x => x.RecurringTransactionId == recurringTransaction.Id)
-            .MaxAsync(x => x.DateOccurred, ct);
-
-        var newOccurranceDate = DateOnly.FromDateTime(lastOccurredDateTime);
-
         List<AccountTransactionDto> accountTransactionDtos = [];
+        
+        var lastOccurredDateTime = await dbContext.AccountTransactions
+            .Where(x => x.RecurringTransactionId == recurringTransaction.Id)
+            .Select(x => x.DateOccurred)
+            .DefaultIfEmpty()
+            .MaxAsync(ct);
 
-        while (newOccurranceDate <= endDate)
+        if (lastOccurredDateTime == DateTime.MinValue)
         {
-            newOccurranceDate = recurringTransaction.Recurrence.Frequency switch
+           
+        }
+
+        var lastOccurranceDate = lastOccurredDateTime !=  DateTime.MinValue 
+            ? DateOnly.FromDateTime(lastOccurredDateTime)
+            : recurringTransaction.Recurrence.StartDate ;
+        
+        while (lastOccurranceDate <= endDate)
+        {
+            lastOccurranceDate = recurringTransaction.Recurrence.Frequency switch
             {
-                Frequencies.Weekly => newOccurranceDate.AddDays(7),
-                Frequencies.BiWeekly => newOccurranceDate.AddDays(14),
-                Frequencies.Monthly => newOccurranceDate.AddMonths(1),
-                Frequencies.Quarterly => newOccurranceDate.AddMonths(3),
-                Frequencies.Yearly => newOccurranceDate.AddYears(1),
+                Frequencies.Weekly => lastOccurranceDate.AddDays(7),
+                Frequencies.BiWeekly => lastOccurranceDate.AddDays(14),
+                Frequencies.Monthly => lastOccurranceDate.AddMonths(1),
+                Frequencies.Quarterly => lastOccurranceDate.AddMonths(3),
+                Frequencies.Yearly => lastOccurranceDate.AddYears(1),
                 _ => DateOnly.MinValue
             };
 
-            if (startDate <= newOccurranceDate && newOccurranceDate <= endDate)
+            if (startDate <= lastOccurranceDate && lastOccurranceDate <= endDate)
             {
                 var accountTransactionResult = AccountTransaction.CreateFromRecurringTransaction(recurringTransaction,
-                    newOccurranceDate.ToDateTime(TimeOnly.MinValue), AccountTransactionStatus.Pending);
+                    lastOccurranceDate.ToDateTime(TimeOnly.MinValue), AccountTransactionStatus.Pending);
 
                 if (accountTransactionResult.IsFailure)
                 {

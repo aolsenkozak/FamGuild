@@ -1,3 +1,6 @@
+using FamGuild.API.Features.AccountTransactions.Create;
+using FamGuild.API.Features.AccountTransactions.Get;
+using FamGuild.API.Features.Common;
 using FamGuild.API.Features.RecurringTransactions.Create;
 using FamGuild.API.Features.RecurringTransactions.Get;
 using FamGuild.API.Persistence;
@@ -14,6 +17,8 @@ builder.Services.AddDbContext<FamGuildDbContext>(options =>
 
 builder.Services.AddCreateRecurringTransactionCommandHandlerToDependencyInjection();
 builder.Services.AddGetRecurringTransactionCommandHandlerToDependencyInjection();
+builder.Services.AddGetAccountTransactionCommandHandlerToDependencyInjection();
+builder.Services.AddCreateAccountTransactionHandlerToDependencyInjection();
 
 var app = builder.Build();
 
@@ -24,5 +29,7 @@ app.UseHttpsRedirection();
 
 app.RegisterCreateRecurringTransactionEndpoints();
 app.RegisterGetRecurringTransactionEndpoints();
+app.RegisterCreateAccountTransactionEndpoints();
+app.RegisterGetAccountTransactionEndpoints();
 
 app.Run();

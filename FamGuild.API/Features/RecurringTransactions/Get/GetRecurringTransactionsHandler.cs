@@ -7,9 +7,9 @@ using Microsoft.EntityFrameworkCore;
 namespace FamGuild.API.Features.RecurringTransactions.Get;
 
 public class GetRecurringTransactionsHandler(FamGuildDbContext dbContext)
-    : ICommandHandler<GetRecurringTransactionsCommand, Result<List<RecurringTransaction>>>
+    : ICommandHandler<GetRecurringTransactionsQuery, Result<List<RecurringTransaction>>>
 {
-    public async Task<Result<List<RecurringTransaction>>> HandleAsync(GetRecurringTransactionsCommand command,
+    public async Task<Result<List<RecurringTransaction>>> HandleAsync(GetRecurringTransactionsQuery query,
         CancellationToken ct = default)
     {
         var recurringTransactions = await dbContext.RecurringTransactions

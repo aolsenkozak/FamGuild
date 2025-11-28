@@ -10,7 +10,7 @@ public static class GetRecurringTransactionEndpoints
     public static void AddGetRecurringTransactionCommandHandlerToDependencyInjection(this IServiceCollection services)
     {
         services
-            .AddScoped<ICommandHandler<GetRecurringTransactionsCommand, Result<List<RecurringTransaction>>>,
+            .AddScoped<ICommandHandler<GetRecurringTransactionsQuery, Result<List<RecurringTransaction>>>,
                 GetRecurringTransactionsHandler>();
     }
 
@@ -20,7 +20,7 @@ public static class GetRecurringTransactionEndpoints
             [FromRoute] Guid id,
             [FromServices] GetByIdQueryHandler<RecurringTransaction> handler) =>
         {
-            var command = new GetByIdQuery<RecurringTransaction>(id);
+            var command = new GetByIdQuery(id);
             var handlerResult = await handler.HandleAsync(command);
 
             return handlerResult switch
@@ -35,9 +35,9 @@ public static class GetRecurringTransactionEndpoints
         });
 
         app.MapGet("recurring-transactions/", async (
-            [FromServices] ICommandHandler<GetRecurringTransactionsCommand, Result<List<RecurringTransaction>>> handler) =>
+            [FromServices] IQueryHandler<GetRecurringTransactionsQuery, Result<List<RecurringTransaction>>> handler) =>
         {
-            var command = new GetRecurringTransactionsCommand();
+            var command = new GetRecurringTransactionsQuery();
             var handlerResult = await handler.HandleAsync(command);
 
             return handlerResult switch

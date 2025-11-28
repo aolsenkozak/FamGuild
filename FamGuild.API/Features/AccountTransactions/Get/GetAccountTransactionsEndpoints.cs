@@ -9,6 +9,8 @@ public static class GetAccountTransactionsEndpoints
 {
     public static void AddGetAccountTransactionCommandHandlerToDependencyInjection(this IServiceCollection services)
     {
+        services.AddScoped<IAccountTransactionGenerationService, AccountTransactionGenerationService>();
+        
         services
             .AddScoped<IQueryHandler<GetAccountTransactionsQuery, Result<List<AccountTransactionDto>>>,
                 GetAccountTransactionsHandler>();
@@ -18,9 +20,9 @@ public static class GetAccountTransactionsEndpoints
     {
         app.MapGet("account-transactions/{id}", async (
             [FromRoute] Guid id,
-            [FromServices] GetByIdQueryHandler<AccountTransaction> handler) =>
+            [FromServices] GetByIdQueryHandler<AccountTransactionDto> handler) =>
         {
-            var query = new GetByIdQuery<AccountTransaction>(id);
+            var query = new GetByIdQuery(id);
             var handlerResult = await handler.HandleAsync(query);
 
             return handlerResult switch
@@ -37,7 +39,7 @@ public static class GetAccountTransactionsEndpoints
         app.MapGet("account-transactions/", async (
             [FromQuery] DateOnly startDate,
             [FromQuery] DateOnly endDate,
-            [FromServices] IQueryHandler<GetAccountTransactionsQuery, Result<List<AccountTransaction>>> handler) =>
+            [FromServices] IQueryHandler<GetAccountTransactionsQuery, Result<List<AccountTransactionDto>>> handler) =>
         {
             var query = new GetAccountTransactionsQuery(startDate, endDate);
             var handlerResult = await handler.HandleAsync(query);

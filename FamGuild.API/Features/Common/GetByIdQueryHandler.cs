@@ -4,10 +4,10 @@ using FamGuild.API.Persistence;
 namespace FamGuild.API.Features.Common;
 
 public class GetByIdQueryHandler<TEntity>(FamGuildDbContext dbContext) :
-    IQueryHandler<GetByIdQuery<TEntity>, Result<TEntity>>
+    IQueryHandler<GetByIdQuery, Result<TEntity>>
         where TEntity : class
 {
-    public async Task<Result<TEntity>> HandleAsync(GetByIdQuery<TEntity> query, CancellationToken ct = default)
+    public async Task<Result<TEntity>> HandleAsync(GetByIdQuery query, CancellationToken ct = default)
     {
         var entity = await dbContext.Set<TEntity>().FindAsync(query.Id, ct);
 
