@@ -7,7 +7,7 @@ namespace FamGuild.API.Features.AccountTransactions.Get;
 
 public static class GetAccountTransactionsEndpoints
 {
-    public static void AddGetRecurringTransactionCommandHandlerToDependencyInjection(this IServiceCollection services)
+    public static void AddGetAccountTransactionCommandHandlerToDependencyInjection(this IServiceCollection services)
     {
         services
             .AddScoped<IQueryHandler<GetAccountTransactionsQuery, Result<List<AccountTransactionDto>>>,

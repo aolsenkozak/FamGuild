@@ -17,3 +17,6 @@ Content-Type: application/json
 
 ###GetRecurringItems
 GET {{HostAddress}}/recurring-transactions/
+
+###GetAccountTransactions
+GET {{HostAddress}}/account-transactions/
