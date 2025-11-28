@@ -17,10 +17,10 @@ public static class GetRecurringTransactionEndpoints
     public static void RegisterGetRecurringTransactionEndpoints(this WebApplication app)
     {
         app.MapGet("recurring-transactions/{id}", async (
-            [FromRoute] Guid? id,
-            [FromServices] ICommandHandler<GetRecurringTransactionsCommand, Result<List<RecurringTransaction>>> handler) =>
+            [FromRoute] Guid id,
+            [FromServices] GetByIdQueryHandler<RecurringTransaction> handler) =>
         {
-            var command = new GetRecurringTransactionsCommand(id ?? Guid.Empty);
+            var command = new GetByIdQuery<RecurringTransaction>(id);
             var handlerResult = await handler.HandleAsync(command);
 
             return handlerResult switch
@@ -37,7 +37,7 @@ public static class GetRecurringTransactionEndpoints
         app.MapGet("recurring-transactions/", async (
             [FromServices] ICommandHandler<GetRecurringTransactionsCommand, Result<List<RecurringTransaction>>> handler) =>
         {
-            var command = new GetRecurringTransactionsCommand(Guid.Empty);
+            var command = new GetRecurringTransactionsCommand();
             var handlerResult = await handler.HandleAsync(command);
 
             return handlerResult switch
