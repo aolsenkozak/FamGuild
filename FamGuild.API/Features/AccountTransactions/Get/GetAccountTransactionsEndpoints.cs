@@ -10,7 +10,7 @@ public static class GetAccountTransactionsEndpoints
     public static void AddGetRecurringTransactionCommandHandlerToDependencyInjection(this IServiceCollection services)
     {
         services
-            .AddScoped<ICommandHandler<GetAccountTransactionsQuery, Result<List<AccountTransaction>>>,
+            .AddScoped<IQueryHandler<GetAccountTransactionsQuery, Result<List<AccountTransactionDto>>>,
                 GetAccountTransactionsHandler>();
     }
 

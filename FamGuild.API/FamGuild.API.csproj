@@ -18,6 +18,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Folder Include="Features\AccountTransactions\Create\" />
       <Folder Include="Migrations\" />
     </ItemGroup>
 

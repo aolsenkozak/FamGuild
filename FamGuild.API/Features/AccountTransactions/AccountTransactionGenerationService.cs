@@ -8,14 +8,14 @@ namespace FamGuild.API.Features.AccountTransactions;
 
 public class AccountTransactionGenerationService(FamGuildDbContext dbContext)
 {
-    public async Task<Result<List<AccountTransaction>>> CreateAccountTransactionsForDateRange(
+    public async Task<Result<List<AccountTransactionDto>>> CreateAccountTransactionsForDateRange(
         DateOnly startDate, DateOnly endDate, CancellationToken ct = default)
     {
         var recurringTransactions = dbContext.RecurringTransactions
             .AsNoTracking()
             .ToList();
 
-        List<AccountTransaction> newAccountTransactions = [];
+        List<AccountTransactionDto> newAccountTransactionDtos = [];
 
         foreach (var recTransaction in recurringTransactions)
         {
@@ -23,16 +23,16 @@ public class AccountTransactionGenerationService(FamGuildDbContext dbContext)
                 ct);
             if (result.IsFailure)
             {
-                return Result.Failure<List<AccountTransaction>>(result.Error);
+                return Result.Failure<List<AccountTransactionDto>>(result.Error);
             }
             
-            newAccountTransactions.AddRange(result.Value);
+            newAccountTransactionDtos.AddRange(result.Value);
         }
         
-        return Result.Success(newAccountTransactions);
+        return Result.Success(newAccountTransactionDtos);
     }
 
-    private async Task<Result<List<AccountTransaction>>> CreateAccountTransactionsForRecurringTransactionForDateRange(
+    private async Task<Result<List<AccountTransactionDto>>> CreateAccountTransactionsForRecurringTransactionForDateRange(
         RecurringTransaction recurringTransaction, DateOnly startDate, DateOnly endDate, CancellationToken ct = default)
     {
         var lastOccurredDateTime = await dbContext.AccountTransactions
@@ -42,7 +42,7 @@ public class AccountTransactionGenerationService(FamGuildDbContext dbContext)
 
         var newOccurranceDate = DateOnly.FromDateTime(lastOccurredDateTime);
 
-        List<AccountTransaction> accountTransactions = [];
+        List<AccountTransactionDto> accountTransactionDtos = [];
 
         while (newOccurranceDate <= endDate)
         {
@@ -63,14 +63,14 @@ public class AccountTransactionGenerationService(FamGuildDbContext dbContext)
 
                 if (accountTransactionResult.IsFailure)
                 {
-                    return Result.Failure<List<AccountTransaction>>(accountTransactionResult.Error);
+                    return Result.Failure<List<AccountTransactionDto>>(accountTransactionResult.Error);
                 }
                 
-                accountTransactions.Add(accountTransactionResult.Value);
+                accountTransactionDtos.Add(accountTransactionResult.Value.ToDto());
             }
         }
         
-        return Result.Success(accountTransactions);
+        return Result.Success(accountTransactionDtos);
     }
 
 

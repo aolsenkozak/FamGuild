@@ -5,6 +5,15 @@ namespace FamGuild.API.Domain.Treasury;
 
 public class AccountTransaction
 {
+    public Guid Id { get; private set; }
+    public EntryClassification Classification { get; private set; }
+    public string Name { get; private set; } = string.Empty;
+    public Money Amount { get; private set; }
+    public string Category { get; private set; } = string.Empty;
+    public DateTime DateOccurred { get; private set; }
+    public AccountTransactionStatus Status { get; private set; } = AccountTransactionStatus.Pending;
+    public Guid? RecurringTransactionId { get; private set; }
+    
     private AccountTransaction(EntryClassification classification, string name, Money amount,
         string category, DateTime dateOccurred, AccountTransactionStatus status,
         Guid? recurringTransactionId = null)
@@ -24,14 +33,7 @@ public class AccountTransaction
     {
     }
 
-    public Guid Id { get; private set; }
-    public EntryClassification Classification { get; private set; }
-    public string Name { get; private set; } = string.Empty;
-    public Money Amount { get; private set; }
-    public string Category { get; private set; } = string.Empty;
-    public DateTime DateOccurred { get; private set; }
-    public AccountTransactionStatus Status { get; private set; } = AccountTransactionStatus.Pending;
-    public Guid? RecurringTransactionId { get; private set; }
+
 
     public static Result<AccountTransaction> CreateFromRecurringTransaction(
         RecurringTransaction recurringTransaction,
