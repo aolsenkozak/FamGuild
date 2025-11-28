@@ -8,34 +8,41 @@ namespace FamGuild.API.Features.AccountTransactions;
 
 public class AccountTransactionGenerationService(FamGuildDbContext dbContext)
 {
-    public async Task<Result> CreateAccountTransactionsForDateRange(
+    public async Task<Result<List<AccountTransaction>>> CreateAccountTransactionsForDateRange(
         DateOnly startDate, DateOnly endDate, CancellationToken ct = default)
     {
         var recurringTransactions = dbContext.RecurringTransactions
             .AsNoTracking()
             .ToList();
 
+        List<AccountTransaction> newAccountTransactions = [];
+
         foreach (var recTransaction in recurringTransactions)
         {
-            var result = await CreateAccountTransactionsForRecurringTransactionForDateRange(recTransaction, startDate, endDate);
+            var result = await CreateAccountTransactionsForRecurringTransactionForDateRange(recTransaction, startDate, endDate,
+                ct);
             if (result.IsFailure)
             {
-                return Result.Failure(result.Error);
+                return Result.Failure<List<AccountTransaction>>(result.Error);
             }
+            
+            newAccountTransactions.AddRange(result.Value);
         }
         
-        return Result.Success();
+        return Result.Success(newAccountTransactions);
     }
 
-    private async Task<Result> CreateAccountTransactionsForRecurringTransactionForDateRange(
+    private async Task<Result<List<AccountTransaction>>> CreateAccountTransactionsForRecurringTransactionForDateRange(
         RecurringTransaction recurringTransaction, DateOnly startDate, DateOnly endDate, CancellationToken ct = default)
     {
-        var lastOccurredDateTime = dbContext.AccountTransactions
+        var lastOccurredDateTime = await dbContext.AccountTransactions
             .AsNoTracking()
             .Where(x => x.RecurringTransactionId == recurringTransaction.Id)
-            .Max(x => x.DateOccurred);
+            .MaxAsync(x => x.DateOccurred, ct);
 
         var newOccurranceDate = DateOnly.FromDateTime(lastOccurredDateTime);
+
+        List<AccountTransaction> accountTransactions = [];
 
         while (newOccurranceDate <= endDate)
         {
@@ -56,26 +63,14 @@ public class AccountTransactionGenerationService(FamGuildDbContext dbContext)
 
                 if (accountTransactionResult.IsFailure)
                 {
-                    return Result.Failure(accountTransactionResult.Error);
+                    return Result.Failure<List<AccountTransaction>>(accountTransactionResult.Error);
                 }
-            
-                var accountTransactionToAdd = accountTransactionResult.Value;
-            
-                dbContext.AccountTransactions.Add(accountTransactionToAdd);
-                try
-                {
-                    await dbContext.SaveChangesAsync(ct);
-                }
-                catch (Exception ex) when (ex is DbUpdateException || ex is DbUpdateConcurrencyException)
-                {
-                    var error = new Error("DBError", $"Error occurred while adding Recurring Item: {ex.Message}");
-                    return Result.Failure(error);
-                }
+                
+                accountTransactions.Add(accountTransactionResult.Value);
             }
         }
         
-        
-        return Result.Success();
+        return Result.Success(accountTransactions);
     }
 
 
