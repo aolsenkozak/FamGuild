@@ -17,7 +17,7 @@ public class CreateAccountTransactionHandler(FamGuildDbContext dbContext)
                 t.Name,
                 t.Amount,
                 t.Category,
-                t.DateOccurred,
+                t.DateOccurred.ToUniversalTime(),
                 t.Status))
             .ToList();
         

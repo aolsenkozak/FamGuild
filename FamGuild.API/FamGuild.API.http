@@ -20,3 +20,23 @@ GET {{HostAddress}}/recurring-transactions/
 
 ###GetAccountTransactions
 GET {{HostAddress}}/account-transactions/?startDate=2025-11-01&endDate=2025-11-30
+
+###CreateAccountTransactions
+POST {{HostAddress}}/account-transactions/
+Content-Type: application/json
+
+{
+  "AccountTransactionsToCreate": [
+    {
+      "classification": 0,
+      "name": "testAccountTransaction",
+      "amount": {
+        "value": 100.00,
+        "currencycode": "CAD"
+      },
+      "category": "Unknown",
+      "DateOccurred": "2025-11-28T00:00:00",
+      "Status": 1
+    }
+  ]
+}
