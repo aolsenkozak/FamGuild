@@ -1,5 +1,4 @@
-﻿using FamGuild.API.Domain.Common.ResultPattern;
-using FamGuild.API.Domain.Treasury;
+﻿using FamGuild.Domain.Common.ResultPattern;
 using FamGuild.API.Features.Common;
 using Microsoft.AspNetCore.Mvc;
 

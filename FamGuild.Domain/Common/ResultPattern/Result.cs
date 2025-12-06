@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 
-namespace FamGuild.API.Domain.Common.ResultPattern;
+namespace FamGuild.Domain.Common.ResultPattern;
 
 public class Result
 {

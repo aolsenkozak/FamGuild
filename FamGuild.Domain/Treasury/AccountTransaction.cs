@@ -1,7 +1,7 @@
-﻿using FamGuild.API.Domain.Common.ResultPattern;
-using FamGuild.API.Domain.Treasury.Common;
+﻿using FamGuild.Domain.Common.ResultPattern;
+using FamGuild.Domain.Treasury.Common;
 
-namespace FamGuild.API.Domain.Treasury;
+namespace FamGuild.Domain.Treasury;
 
 public class AccountTransaction
 {

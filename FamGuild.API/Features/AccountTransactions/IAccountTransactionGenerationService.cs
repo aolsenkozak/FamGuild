@@ -1,4 +1,4 @@
-﻿using FamGuild.API.Domain.Common.ResultPattern;
+﻿using FamGuild.Domain.Common.ResultPattern;
 
 namespace FamGuild.API.Features.AccountTransactions;
 

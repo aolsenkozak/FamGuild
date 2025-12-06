@@ -1,4 +1,4 @@
-﻿namespace FamGuild.API.Domain.Common.ResultPattern;
+﻿namespace FamGuild.Domain.Common.ResultPattern;
 
 public record Error(string Code, string Message)
 {

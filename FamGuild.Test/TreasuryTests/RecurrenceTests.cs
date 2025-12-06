@@ -1,4 +1,4 @@
-﻿using FamGuild.API.Domain.Treasury.Common;
+﻿using FamGuild.Domain.Treasury.Common;
 
 namespace FamGuild.Test.TreasuryTests;
 

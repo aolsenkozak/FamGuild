@@ -1,4 +1,4 @@
-﻿namespace FamGuild.API.Domain.Treasury;
+﻿namespace FamGuild.Domain.Treasury.Common;
 
 public enum EntryClassification
 {

@@ -1,7 +1,8 @@
-﻿using FamGuild.API.Domain.Common.ResultPattern;
-using FamGuild.API.Domain.Treasury;
+﻿using FamGuild.Domain.Common.ResultPattern;
+using FamGuild.Domain.Treasury;
 using FamGuild.API.Features.Common;
 using FamGuild.API.Persistence;
+using FamGuild.Shared.Treasury.Features.RecurringTransactions;
 using Microsoft.EntityFrameworkCore;
 
 namespace FamGuild.API.Features.RecurringTransactions.Create;

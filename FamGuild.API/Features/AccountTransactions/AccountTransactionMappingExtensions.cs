@@ -1,4 +1,4 @@
-﻿using FamGuild.API.Domain.Treasury;
+﻿using FamGuild.Domain.Treasury;
 
 namespace FamGuild.API.Features.AccountTransactions;
 

@@ -1,5 +1,6 @@
-﻿using FamGuild.API.Domain.Common.ResultPattern;
+﻿using FamGuild.Domain.Common.ResultPattern;
 using FamGuild.API.Features.Common;
+using FamGuild.Shared.Treasury.Features.RecurringTransactions;
 
 namespace FamGuild.API.Features.RecurringTransactions.Create;
 

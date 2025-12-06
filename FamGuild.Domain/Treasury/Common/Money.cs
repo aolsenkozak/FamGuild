@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace FamGuild.API.Domain.Treasury.Common;
+namespace FamGuild.Domain.Treasury.Common;
 
 [Owned]
 public record Money(decimal Value, string CurrencyCode);

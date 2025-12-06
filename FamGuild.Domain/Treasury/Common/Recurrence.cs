@@ -1,7 +1,7 @@
-﻿using FamGuild.API.Domain.Common.ResultPattern;
+﻿using FamGuild.Domain.Common.ResultPattern;
 using Microsoft.EntityFrameworkCore;
 
-namespace FamGuild.API.Domain.Treasury.Common;
+namespace FamGuild.Domain.Treasury.Common;
 
 [Owned]
 public record Recurrence

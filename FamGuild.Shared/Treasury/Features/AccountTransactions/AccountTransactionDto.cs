@@ -1,5 +1,5 @@
-﻿using FamGuild.API.Domain.Treasury;
-using FamGuild.API.Domain.Treasury.Common;
+﻿using FamGuild.Domain.Treasury;
+using FamGuild.Domain.Treasury.Common;
 
 namespace FamGuild.API.Features.AccountTransactions;
 

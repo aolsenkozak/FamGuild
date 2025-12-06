@@ -1,7 +1,6 @@
-﻿using FamGuild.API.Domain.Treasury;
-using FamGuild.API.Domain.Treasury.Common;
+﻿using FamGuild.Domain.Treasury.Common;
 
-namespace FamGuild.API.Features.RecurringTransactions.Create;
+namespace FamGuild.Shared.Treasury.Features.RecurringTransactions;
 
 public record CreateRecurringTransactionCommand
 {
