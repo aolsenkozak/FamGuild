@@ -4,7 +4,10 @@
         <TargetFramework>net10.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-      <UserSecretsId>ada2de92-906c-432e-a9fe-090501ee8f6b</UserSecretsId>
-  </PropertyGroup>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\FamGuild.Domain\FamGuild.Domain.csproj" />
+    </ItemGroup>
 
 </Project>
