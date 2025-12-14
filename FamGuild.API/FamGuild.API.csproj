@@ -19,12 +19,11 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Domain\" />
       <Folder Include="Migrations\" />
+      <Folder Include="Treasury\" />
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\FamGuild.Domain\FamGuild.Domain.csproj" />
       <ProjectReference Include="..\FamGuild.Shared\FamGuild.Shared.csproj" />
     </ItemGroup>
 

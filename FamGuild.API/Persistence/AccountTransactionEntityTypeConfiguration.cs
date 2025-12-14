@@ -1,4 +1,5 @@
-﻿using FamGuild.Domain.Treasury;
+﻿using FamGuild.API.Treasury.AccountTransactions;
+using FamGuild.Domain.Treasury;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

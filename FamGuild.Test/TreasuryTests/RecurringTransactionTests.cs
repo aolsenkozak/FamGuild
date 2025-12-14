@@ -1,4 +1,4 @@
-﻿using FamGuild.Domain.Treasury;
+﻿using FamGuild.API.Treasury.RecurringTransactions;
 using FamGuild.Domain.Treasury.Common;
 
 namespace FamGuild.Test.TreasuryTests;
@@ -15,10 +15,11 @@ public class RecurringTransactionTests
         var testName = "TestIncomeItem";
         var testCategory = "TestCategory";
 
-        var testAmount = new Money((decimal)100.00, "CAD");
+        var testAmount = (decimal)100.00;
+        var testCurrencyCode = "CAD";
 
-        var recurringItemResult = RecurringTransaction.Create(itemType, testName,
-            testAmount, testCategory, startDate, endDate, frequency);
+        var recurringItemResult = RecurringTransaction.Create(nameof(itemType), testName,
+            testAmount, testCurrencyCode, testCategory, startDate, endDate, frequency.ToString());
 
         Assert.That(recurringItemResult.IsSuccess, Is.True);
 
@@ -28,7 +29,7 @@ public class RecurringTransactionTests
         {
             Assert.That(recurringItem.Name, Is.EqualTo(testName));
             Assert.That(recurringItem.Category, Is.EqualTo(testCategory));
-            Assert.That(recurringItem.Amount, Is.EqualTo(testAmount));
+            Assert.That(recurringItem.Amount.Value, Is.EqualTo(testAmount));
             Assert.That(recurringItem.Recurrence.StartDate, Is.EqualTo(startDate));
             Assert.That(recurringItem.Recurrence.EndDate, Is.EqualTo(endDate));
             Assert.That(recurringItem.Recurrence.Frequency, Is.EqualTo(frequency));

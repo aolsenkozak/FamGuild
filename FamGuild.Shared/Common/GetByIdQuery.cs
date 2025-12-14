@@ -1,3 +1,3 @@
-﻿namespace FamGuild.API.Features.Common;
+﻿namespace FamGuild.Shared.Common;
 
 public record GetByIdQuery(Guid Id);

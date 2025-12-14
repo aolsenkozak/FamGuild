@@ -16,4 +16,9 @@
       </PackageReference>
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Common\" />
+      <Folder Include="Treasury\" />
+    </ItemGroup>
+
 </Project>

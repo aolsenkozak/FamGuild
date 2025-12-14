@@ -1,8 +1,7 @@
-using FamGuild.API.Features.AccountTransactions.Create;
-using FamGuild.API.Features.AccountTransactions.Get;
-using FamGuild.API.Features.Common;
-using FamGuild.API.Features.RecurringTransactions.Create;
-using FamGuild.API.Features.RecurringTransactions.Get;
+using FamGuild.API.Treasury.AccountTransactions.Create;
+using FamGuild.API.Treasury.AccountTransactions.Get;
+using FamGuild.API.Treasury.RecurringTransactions.Create;
+using FamGuild.API.Treasury.RecurringTransactions.Get;
 using FamGuild.API.Persistence;
 using Microsoft.EntityFrameworkCore;
 

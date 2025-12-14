@@ -7,13 +7,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System;
 using System.Reflection;
 
 [assembly: System.Reflection.AssemblyCompanyAttribute("FamGuild.Test")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4a3a1e4435dfdba1a51c2afa19dd5eb471ea2711")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c7e8923f0dbd5934ccdde44d8d2859b57baeefb3")]
 [assembly: System.Reflection.AssemblyProductAttribute("FamGuild.Test")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FamGuild.Test")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

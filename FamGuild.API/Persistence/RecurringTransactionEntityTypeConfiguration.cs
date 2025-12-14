@@ -1,4 +1,4 @@
-﻿using FamGuild.Domain.Treasury;
+﻿using FamGuild.API.Treasury.RecurringTransactions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

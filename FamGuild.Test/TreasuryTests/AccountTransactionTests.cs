@@ -1,4 +1,5 @@
-﻿using FamGuild.Domain.Treasury;
+﻿using FamGuild.API.Treasury.AccountTransactions;
+using FamGuild.API.Treasury.RecurringTransactions;
 using FamGuild.Domain.Treasury.Common;
 
 namespace FamGuild.Test.TreasuryTests;
@@ -8,16 +9,18 @@ public class AccountTransactionTests
     [Test]
     public void LedgerEntry_ShouldGetCreated_WhenProvidedValidRecurringItem()
     {
-        var testAmount = new Money((decimal)100.00, "CAD");
+        var testAmount = (decimal)100.00;
+        var testCurrencyCode = "CAD";
         var today = DateOnly.FromDateTime(DateTime.Today);
         var testRecurringTransaction = RecurringTransaction.Create(
-            EntryClassification.Income,
+            nameof(EntryClassification.Income),
             "testItem",
             testAmount,
+            testCurrencyCode,
             "Unknown",
             today,
             null,
-            Frequencies.BiWeekly
+            nameof(Frequencies.BiWeekly)
         ).Value;
 
         var testLedgerEntryResult =
@@ -41,16 +44,17 @@ public class AccountTransactionTests
     [Test]
     public void LedgerEntry_ShouldGetCreated_WhenProvidedValidInformation()
     {
-        var testAmount = new Money((decimal)100.00, "CAD");
+        var testAmount = (decimal)100.00;
+        var testCurrencyCode = "CAD";
         var testName = "testExpense";
         var testCategory = "Unknown";
         var transactionStatus = AccountTransactionStatus.Confirmed;
         var entryClassification = EntryClassification.Expense;
 
         var testLedgerEntryResult =
-            AccountTransaction.Create(EntryClassification.Expense,
-                testName, testAmount, testCategory,
-                DateTime.Now, transactionStatus);
+            AccountTransaction.Create(nameof(EntryClassification.Expense),
+                testName, testAmount, testCurrencyCode, testCategory,
+                DateTime.Now, nameof(transactionStatus));
 
         Assert.That(testLedgerEntryResult.IsSuccess, Is.True);
 
@@ -60,7 +64,7 @@ public class AccountTransactionTests
         {
             Assert.That(testLedgerEntry.Name, Is.EqualTo(testName));
             Assert.That(testLedgerEntry.Category, Is.EqualTo(testCategory));
-            Assert.That(testLedgerEntry.Amount, Is.EqualTo(testAmount));
+            Assert.That(testLedgerEntry.Amount.Value, Is.EqualTo(testAmount));
             Assert.That(testLedgerEntry.Classification, Is.EqualTo(entryClassification));
         });
     }
