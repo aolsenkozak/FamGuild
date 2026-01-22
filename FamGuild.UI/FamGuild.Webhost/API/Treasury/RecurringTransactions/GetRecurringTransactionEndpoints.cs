@@ -1,0 +1,55 @@
+﻿using FamGuild.Core.Application.Common;
+using FamGuild.Core.Application.Treasury.RecurringTransactions.Get;
+using FamGuild.Core.Domain.Common.ResultPattern;
+using FamGuild.Core.Domain.Treasury;
+using Microsoft.AspNetCore.Mvc;
+
+namespace FamGuild.UI.API.Treasury.RecurringTransactions;
+
+public static class GetRecurringTransactionEndpoints
+{
+    public static void AddGetRecurringTransactionCommandHandlerToDependencyInjection(this IServiceCollection services)
+    {
+        services
+            .AddScoped<IQueryHandler<GetRecurringTransactionsQuery, Result<List<RecurringTransaction>>>,
+                GetRecurringTransactionsHandler>();
+    }
+
+    public static void RegisterGetRecurringTransactionEndpoints(this WebApplication app)
+    {
+        app.MapGet("recurring-transactions/{id}", async (
+            [FromRoute] Guid id,
+            [FromServices] GetByIdQueryHandler<RecurringTransaction> handler) =>
+        {
+            var command = new GetByIdQuery(id);
+            var handlerResult = await handler.HandleAsync(command);
+
+            return handlerResult switch
+            {
+                { IsFailure : true, Error.Code : "NotFound" }
+                    => Results.NotFound(),
+                { IsFailure: true, Error: var error }
+                    => Results.InternalServerError(error.Message),
+                { Value: var value }
+                    => Results.Ok(value)
+            };
+        });
+
+        app.MapGet("recurring-transactions/", async (
+            [FromServices] IQueryHandler<GetRecurringTransactionsQuery, Result<List<RecurringTransaction>>> handler) =>
+        {
+            var command = new GetRecurringTransactionsQuery();
+            var handlerResult = await handler.HandleAsync(command);
+
+            return handlerResult switch
+            {
+                { IsFailure : true, Error.Code : "NotFound" }
+                    => Results.NotFound(),
+                { IsFailure: true, Error: var error }
+                    => Results.InternalServerError(error.Message),
+                { Value: var value }
+                    => Results.Ok(value)
+            };
+        });
+    }
+}
