@@ -20,8 +20,4 @@
         <Using Include="NUnit.Framework"/>
     </ItemGroup>
 
-    <ItemGroup>
-        <ProjectReference Include="..\FamGuild.API\FamGuild.API.csproj"/>
-    </ItemGroup>
-
 </Project>
