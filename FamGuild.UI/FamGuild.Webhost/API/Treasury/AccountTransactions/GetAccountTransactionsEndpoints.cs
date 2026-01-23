@@ -8,7 +8,7 @@ namespace FamGuild.UI.API.Treasury.AccountTransactions;
 
 public static class GetAccountTransactionsEndpoints
 {
-    public static void AddGetAccountTransactionCommandHandlerToDependencyInjection(this IServiceCollection services)
+    public static void AddGetAccountTransactionQueryHandlerToDependencyInjection(this IServiceCollection services)
     {
         services.AddScoped<IAccountTransactionGenerationService, AccountTransactionGenerationService>();
         

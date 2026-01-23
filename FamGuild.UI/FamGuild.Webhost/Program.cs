@@ -1,4 +1,8 @@
+using FamGuild.Core;
+using FamGuild.UI.API.Treasury.AccountTransactions;
+using FamGuild.UI.API.Treasury.RecurringTransactions;
 using FamGuild.UI.Components;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,6 +10,17 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents()
     .AddInteractiveWebAssemblyComponents();
+
+builder.Services.AddOpenApi();
+
+builder.Services.AddDbContext<FamGuildDbContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("Database")));
+
+builder.Services.AddCreateRecurringTransactionCommandHandlerToDependencyInjection();
+builder.Services.AddGetRecurringTransactionCommandHandlerToDependencyInjection();
+builder.Services.AddGetAccountTransactionQueryHandlerToDependencyInjection();
+builder.Services.AddCreateAccountTransactionHandlerToDependencyInjection();
+
 
 var app = builder.Build();
 
@@ -21,10 +36,16 @@ else
     app.UseHsts();
 }
 
+
 app.UseStatusCodePagesWithReExecute("/not-found", createScopeForStatusCodePages: true);
 app.UseHttpsRedirection();
 
 app.UseAntiforgery();
+
+app.RegisterCreateRecurringTransactionEndpoints();
+app.RegisterGetRecurringTransactionEndpoints();
+app.RegisterCreateAccountTransactionEndpoints();
+app.RegisterGetAccountTransactionEndpoints();
 
 app.MapStaticAssets();
 app.MapRazorComponents<App>()
