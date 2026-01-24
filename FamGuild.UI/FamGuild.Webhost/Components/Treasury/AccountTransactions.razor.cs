@@ -19,7 +19,7 @@ public partial class AccountTransactions : ComponentBase
 
     protected override async Task OnInitializedAsync()
     {
-        DateRange transactionDateRange = new(DateOnly.FromDateTime(DateTime.Now), DateOnly.FromDateTime(DateTime.Now));
+        DateRange transactionDateRange = new(DateOnly.Parse("2025-11-01"), DateOnly.FromDateTime(DateTime.Now));
         
         _accountTransactions = await GetAccountTransactions(transactionDateRange);
     }

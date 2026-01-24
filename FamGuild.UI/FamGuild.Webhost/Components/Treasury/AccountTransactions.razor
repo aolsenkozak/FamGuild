@@ -1,9 +1,13 @@
 @page "/AccountTransactions"
+@using FamGuild.Core.Application.Treasury.AccountTransactions
 @using Microsoft.AspNetCore.Components.QuickGrid
 <h3>AccountTransactions</h3>
 
 <label>List of Account Transactions</label>
 
-<QuickGrid Items="@_accountTransactions">
-    
+<QuickGrid Items="_accountTransactions">
+    <PropertyColumn Property="@(t => t.Classification)"/>
+    <PropertyColumn Property="@(t => t.DateOccurred)"/>
+    <PropertyColumn Property="@(t => t.MoneyAmount)"/>
+    <PropertyColumn Property="@(t => t.Status)"/>
 </QuickGrid>
